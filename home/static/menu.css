@@ -1,0 +1,229 @@
+
+
+body{
+  background-color: rgba(255, 179, 0, 0.789);
+  align-items: center;
+  margin-right: 100px;
+  line-height: 1.5;
+  scroll-behavior: smooth;
+  
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+header{
+
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: black;
+  
+  
+
+}
+
+/* nav bar */
+ /* Adjustments for better appearance */
+
+
+/* end */
+
+.container {
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.navbar-brand h1 {
+margin: 0;
+font-size: 24px;
+}
+
+.navbar-menu {
+list-style: none;
+padding: 0;
+margin: 0;
+}
+
+.navbar-menu li {
+display: inline-block;
+margin-right: 20px;
+}
+
+
+.navbar-cart {
+float: right;
+}
+
+.navbar-cart img {
+width: 24px;
+height: 24px;
+}
+
+#menu div {
+  list-style-type: none;
+  display: none;
+  
+}
+
+#menu div.visible {
+  display: block;
+  margin: 2rem 0;
+}
+
+#breakfastMenu{
+  align-items: center;
+  text-align: center;
+  list-style-type: decimal;
+ 
+}
+
+#lunchMenu{
+  align-items: center;
+  text-align: center;
+  list-style: none;
+
+}
+
+#dinnerMenu{
+  align-items: center;
+  text-align: center;
+  list-style: none;
+}
+
+.menu{
+  margin: 2rem 0;
+}
+.menu-container{
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+img{
+  width: 100%;
+  display: block;
+}
+.menu-head{
+  text-align: center;
+}
+.menu-head h2{
+  font-family: var(--Kaushan);
+  font-size: 2.6rem;
+}
+.menu-head p{
+  font-weight: 300;
+  padding: 1.8rem 0;
+}
+.menu-btns{
+  padding: 0.6rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+
+
+.menu-btn{
+  font-family: var(--Inter);
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: none;
+  border: none;
+  color: black;
+  display: block;
+  margin: 0 1rem;
+  cursor: pointer;
+  outline: 0;
+  transition: opacity 0.4s ease-out;
+}
+.menu-btn::after{
+  content: "";
+  display: block;
+  height: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #fcfcfcd6;
+  margin-top: 0.5rem;
+  width: 0;
+  transition: width 0.4s ease-out;
+}
+.menu-btn:hover::after{
+  width: 100%;
+}
+.menu-btn:hover{
+  opacity: 0.8;
+  color: #fff;
+}
+.active-btn{
+  color: #fff;
+}
+
+
+.Breakfast img{
+  width: 300px;
+  height: 200px;
+}
+
+.lunch img{
+  width: 300px;
+  height: 200px;
+}
+
+.dinner img{
+  width: 300px;
+  height: 200px;
+
+}
+
+/* Navbar styles */
+.navbar {
+background-color: #333;
+color: #0f0e0e;
+padding: 10px 0;
+}
+
+.container {
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.navbar-brand {
+margin: 0;
+}
+
+.navbar-menu {
+list-style: none;
+padding: 0;
+margin: 0;
+}
+
+.navbar-menu li {
+display: inline-block;
+margin-right: 20px;
+}
+
+.navbar-menu li a {
+color: #fff;
+text-decoration: none;
+}
+
+.navbar-cart {
+float: right;
+}
+
+.cart-badge {
+background-color: red;
+color: #fff;
+font-size: 12px;
+padding: 4px 8px;
+border-radius: 50%;
+position: relative;
+top: -10px;
+left: -10px;
+}
+

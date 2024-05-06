@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% load bootstrap4 %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Confirmation</title>
+    <style>
+        /* Your CSS styles here */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Payment Confirmation</h1>
+        
+        {% if payment_successful %}
+            <h2>Payment Successful</h2>
+            <p>Thank you for your purchase. Your order will be processed shortly.</p>
+        {% else %}
+            <h2>Payment Failed</h2>
+            <p>Unfortunately, your payment could not be processed. Please try again or contact us for assistance.</p>
+        {% endif %}
+        
+        <a href="{% url 'homepage' %}">Return to Homepage</a>
+    </div>
+</body>
+</html>

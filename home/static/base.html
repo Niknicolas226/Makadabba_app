@@ -1,0 +1,64 @@
+<!-- base.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    {% load bootstrap4 %}
+    <link rel="stylesheet" type="text/css" href="{% static 'practice.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'button.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <title>{% block title %}Default Title{% endblock %}</title>
+</head>
+<body>
+    <header>
+        {% block header %}
+        <header>
+            <div class="container">
+                <nav class="nav_checkbox">
+                    <div class="col-md-1">
+                         
+    
+    
+                    </div>
+                   <!---<a href="#" class="logo"><marquee width="100%" direction="right" height="100px">
+                        <h1>MA KA DABBA!!!</h1>
+                        </marquee></a> -->
+                        
+                    <input type="checkbox" id="tab-nav" class="tab-nav">
+                    <label for="tab-nav" class="label">
+                        <div class="burger"></div>
+                        <div class="burger"></div>
+                        <div class="burger"></div>
+                    </label>
+                    <ul class="content_nav">
+                        <li><a href="#">HOME</a></li>
+                        <li><a href="signup">SIGNUP</a></li>
+                        <li><a href="signin">LOGIN</a></li>
+                        <li><a href="menu"> OUR MENU</a></li>
+                       
+                        
+                        
+    
+                    </ul>
+                </nav>
+            </div>
+           </header>{% endblock %}</h1>
+    </header>
+
+    <nav>
+        <!-- Navigation menu goes here -->
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>{% block footer %}Default Footer{% endblock %}</p>
+    </footer>
+</body>
+</html>

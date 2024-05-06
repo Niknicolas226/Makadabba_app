@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--=============== BOXICONS ===============-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    {% load static %}
+    {% load bootstrap4 %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style1.css' %}">
+
+    <title>Responsive bottom navigation</title>
+</head>
+<style>
+/* CSS for table size */
+table {
+    width: 90%; /* Adjust the width as needed */
+    margin: 20px auto; /* Center the table */
+    border-collapse: collapse;
+    background-color: #ffffcc; /* Light yellow background */
+}
+
+th, td {
+    padding: 15px; /* Increase padding for cells */
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* CSS for section title */
+.section__title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* CSS for responsive table */
+@media screen and (max-width: 600px) {
+    table {
+        width: 100%;
+    }
+    th, td {
+        padding: 10px;
+    }
+}
+
+/* CSS for toast message */
+#toast-container {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 9999;
+}
+
+.toast {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.toast-success {
+    background-color: #4CAF50;
+}
+
+.toast-error {
+    background-color: #f44336;
+}
+</style>
+<body>
+
+
+    <section class="container section section__height" id="menu">
+        <h2 class="section__title">Menu</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Meal Type</th>
+                        <th>Item Name</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for option in menu_options %}
+                    <tr>
+                        <td>{{ option.get_day_display }}</td>
+                        <td>{{ option.get_meal_type_display }}</td>
+                        <td>{{ option.item_name }}</td>
+                        <td>{{ option.description }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <!-- Toast message container -->
+    <div id="toast-container"></div>
+    
+</main>
+    <!--=============== HEADER ===============-->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="nav__logo">MA KA DABBA!!!</a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="#home" class="nav__link active-link">
+                            <i class='bx bx-home-alt nav__icon'></i>
+                            <span class="nav__name">Home</span>
+                        </a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="view-profile" class="nav__link">
+                            <i class='bx bx-user nav__icon'></i>
+                            <span class="nav__name">profile</span>
+                        </a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="view_cart" class="nav__link">
+                            <i class='bx bx-cart nav__icon'></i>
+                            <span class="nav__name">Cart</span>
+                        </a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="#portfolio" class="nav__link">
+                            <i class='bx bx-briefcase-alt nav__icon'></i>
+                            <span class="nav__name">Orders</span>
+                        </a>
+                    </li>
+
+                    <li class="nav__item">
+                        <a href="menu" class="nav__link">
+                            <i class='bx bx-food-menu nav__icon'></a>
+                            <span class="nav__name">Food menu</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <img src="nik.png" alt="" class="nav__img">
+        </nav>
+    </header>
+
+    <main>
+        <!--=============== HOME ===============-->
+        <section class="container section section__height" id="home">
+            <h2 class="section__title">Home</h2>
+        </section>
+
+        <!--=============== ABOUT ===============-->
+        <section class="container section section__height" id="about">
+            <h2 class="section__title">profile</h2>
+        </section>
+
+        <!--=============== SKILLS ===============-->
+        <section class="container section section__height" id="skills">
+            <h2 class="section__title">Cart</h2>
+        </section>
+
+        <!--=============== PORTFOLIO ===============-->
+        <section class="container section section__height" id="portfolio">
+            <h2 class="section__title">orders</h2>
+        </section>
+
+        <!--=============== CONTACTME ===============-->
+        <section class="container section section__height" id="contactme">
+           
+
+    <!--=============== MAIN JS ===============-->
+    <script src="{% static 'main.js' %}"></script>
+    <script>
+        // Show toast message when logged in through signup page
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    var toastContainer = document.getElementById('toast-container');
+                    function showToast(type, message) {
+                        var toast = document.createElement('div');
+                        toast.className = 'toast';
+                        if (type === 'success') {
+                            toast.className += ' toast-success';
+                        } else if (type === 'error') {
+                            toast.className += ' toast-error';
+                        }
+                        toast.innerHTML = message;
+                        toastContainer.appendChild(toast);
+
+                        setTimeout(function() {
+                            toastContainer.removeChild(toast);
+                        }, 5000); // Remove toast after 5 seconds
+                    }
+
+                    showToast('success', '{{ message }}');
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </script>
+</body>
+</html>

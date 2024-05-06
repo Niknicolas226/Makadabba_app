@@ -1,0 +1,149 @@
+.container-3 nav{
+
+    text-align: center;
+    display: block;
+    margin-top: 200px;
+    
+    }
+    
+    
+    #btn-1{
+        margin-right: 100px;
+        width: 250px;
+        height: 250px;
+        border-radius: 10%;
+        background-image: url(breakfast2.jpg);
+        
+        
+    }
+    #btn-2{
+        margin:100px;
+        width: 250px;
+        height: 250px;
+        border-radius: 10%;
+        background-image: url(luch2.jpg);
+    }
+    #btn-3{
+        margin-left: 100px;
+        width: 250px;
+        height: 250px;
+        border-radius: 10%;
+        background-image: url(dinner2.jpg);
+    
+        
+    }
+    #btn-1:hover{
+        opacity: 0.8;
+        font-size: 30px;
+        transition: 0.8s;
+    }
+    #btn-2:hover{
+        opacity: 0.8;
+        font-size: 30px;
+        transition: 0.8s;
+    }
+    #btn-3:hover{
+        opacity: 0.8;
+        font-size: 30px;
+        transition: 0.8s;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @media screen and (max-width: 780px)
+    {
+         
+        .container-3 nav{
+            margin-top: 50px;
+            display: block;
+            
+            text-align: center;
+            border: 2px solid white;
+            
+            
+            
+            
+            
+            }
+            #btn-1{
+                margin-right: 600px;
+                width: 250px;
+                height: 150px;
+                border-radius: 10%;
+                margin-top: 200px;
+                
+                
+                
+                
+            }
+            #btn-2{
+                margin-right: 700px;
+                width: 250px;
+                height: 150px;
+                border-radius: 10%;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                
+                
+                
+                
+                
+            }
+            #btn-3{
+                margin-right: 700px;
+                width: 250px;
+                height: 150px;
+                border-radius: 10%;
+                
+                
+                
+                
+    
+                
+                
+                
+            }
+    
+    
+    
+    
+    
+    }

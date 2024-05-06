@@ -1,0 +1,96 @@
+{% load static %}
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Profile</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS styles -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #007bff;
+        }
+        h2 {
+            color: #007bff;
+        }
+        p {
+            margin-bottom: 20px;
+        }
+        .profile-picture {
+            margin-top: 30px;
+        }
+        .profile-picture img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+        }
+        .profile-picture img:hover {
+            transform: scale(1.1);
+        }
+        .edit-profile-btn {
+            display: block;
+            width: 150px;
+            margin: 30px auto;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .edit-profile-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body style="background-image: url('{% static '/img/background.jpg' %}'); background-size: cover;">
+    <div class="container">
+        <h1>View Profile</h1>
+        <!-- Display profile picture based on gender -->
+        <div class="profile-picture">
+            <h2>Profile Picture:</h2>
+            {% if profile.gender == 'male' %}
+                <img src="{% static '/img/Men.jpg' %}" alt="Male Avatar">
+            {% elif profile.gender == 'female' %}
+                <img src="{% static '/img/women.jpg' %}" alt="Female Avatar">
+            {% else %}
+                <!-- Default avatar if gender is not specified or invalid -->
+                <img src="{% static '/img/default_avatar.jpg' %}" alt="Default Avatar">
+            {% endif %}
+        </div>
+        <div>
+            <h2>Profile Details:</h2>
+            <p><strong>Name:</strong> {{ profile.name }}</p>
+            <p><strong>Address:</strong> {{ profile.address }}</p>
+            <p><strong>Phone:</strong> {{ profile.phone }}</p>
+            <p><strong>Email:</strong> {{ profile.email }}</p>
+        </div>
+        <!-- Edit Profile Button -->
+        <button class="edit-profile-btn" onclick="location.href='edit-profile'">Edit Profile</button>
+    </div>
+</body>
+</html>

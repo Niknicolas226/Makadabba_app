@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <link rel="stylesheet" href="{%static 'menu.css'%}"> 
+  <title>Document</title>
+</head>
+<body>
+
+  <section class="menu">
+    <div class = "menu-container">
+        <div class = "menu-head">
+          <h2>Choose from the menu !!!! today made food</h2>
+        </div>
+    <div class = "menu-btns">
+        <button type = "button" class = "menu-btn active-btn" id = "breakfastBtn">BREAKFAST</button>
+        <button type = "button" class = "menu-btn" id = "lunchBtn">LUNCH</button>
+        <button type = "button" class = "menu-btn" id = "dinnerBtn">DINNER</button>
+      </div>
+      
+      <div id="menu">
+        <div class="Breakfast" id="breakfastMenu">
+           <h2>Breakfast</h2>
+           <ul>
+              {% for item in breakfast_items %}
+                 <li>
+                    <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                    <a href="{{ item.url }}">{{ item.name }}</a>
+                    <form method="post" action="{% url 'add_to_cart' 'breakfast' item.id %}" class="add-to-cart-form">
+                       {% csrf_token %}
+                       {{ form }}
+                       <button type="submit" class="btn btn-primary cart">Add to cart</button>
+                    </form>
+                 </li>
+              {% endfor %}
+           </ul>
+        </div>
+        <div id="menu">
+          <div class="Breakfast" id="breakfastMenu">
+             <h2>Breakfast</h2>
+             <ul>
+                {% for item in breakfast_items %}
+                   <li>
+                      <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                      <a href="{{ item.url }}">{{ item.name }}</a>
+                      <form method="post" action="{% url 'add_to_cart' 'breakfast' item.id %}" class="add-to-cart-form">
+                         {% csrf_token %}
+                         {{ form }}
+                         <button type="submit" class="btn btn-primary cart">Add to cart</button>
+                      </form>
+                   </li>
+                {% endfor %}
+             </ul>
+          </div>
+          <div id="menu">
+            <div class="Breakfast" id="breakfastMenu">
+               <h2>Breakfast</h2>
+               <ul>
+                  {% for item in breakfast_items %}
+                     <li>
+                        <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                        <a href="{{ item.url }}">{{ item.name }}</a>
+                        <form method="post" action="{% url 'add_to_cart' 'breakfast' item.id %}" class="add-to-cart-form">
+                           {% csrf_token %}
+                           {{ form }}
+                           <button type="submit" class="btn btn-primary cart">Add to cart</button>
+                        </form>
+                     </li>
+                  {% endfor %}
+               </ul>
+            </div>
+          </section>
+
+    
+ <script src="{% static 'script.js' %}"></script>
+</body>
+</html>

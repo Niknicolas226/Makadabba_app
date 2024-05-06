@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% load bootstrap4 %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Error</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 350px;
+            text-align: center;
+        }
+        h1 {
+            color: #ff4d4d;
+            font-weight: normal;
+            font-size: 24px;
+        }
+        p {
+            color: #444;
+            line-height: 1.5;
+            font-size: 16px;
+        }
+        .illustration {
+            max-width: 100%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src= "{% static '/img/error.png' %}" class="illustration" " alt="Illustration">  
+        <h1>Oops! Something went wrong...</h1>
+        <p>{{ message }}</p>
+        <p>Don't worry, it happens to the best of us. Please go back and try again.</p>
+        <p>We'll get through this together.</p>
+    </div>
+</body>
+</html>

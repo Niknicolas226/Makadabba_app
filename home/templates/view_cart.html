@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Cart</title>
+    {% load static %}
+    {% load bootstrap4 %}
+    <link rel="stylesheet" href="{% static 'cart.css' %}"> <!-- Link to an external CSS file -->
+</head>
+<body>
+    <div class="container">
+        <h1 class="page-title">Your Cart</h1>
+        
+        {% if cart_items %}
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th class="item-name">Item</th>
+                        <th class="item-price">Price</th>
+                        <th class="item-quantity">Quantity</th>
+                        <th class="item-total">Total</th>
+                        <th class="item-remove">Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cart_item in cart_items %}
+                        <tr>
+                            <td>{{ cart_item.menu_item.name }}</td>
+                            <td>₹{{ cart_item.menu_item.price }}</td> <!-- Changed $ to ₹ -->
+                            <td>{{ cart_item.quantity }}</td>
+                            <td>₹{{ cart_item.total_price }}</td> <!-- Changed $ to ₹ -->
+                            <td>
+                                <form action="{% url 'remove_from_cart' cart_item.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="remove-button">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+            <p class="total-price">Total Price: ₹{{ total_price }}</p> <!-- Changed $ to ₹ -->
+            
+            <div class="continue-shopping">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'payment_gateway' %}" class="button">Proceed to Payment</a>
+                {% else %}
+                    <p>Please <a href="{% url 'signupna' %}">sign up</a> to proceed to payment.</p>
+                {% endif %}
+                <a href="{% url 'home' %}" class="button">Continue Shopping</a>
+            </div>
+        {% else %}
+            <p class="empty-cart">Your cart is empty.</p>
+            <div class="continue-shopping">
+                <a href="{% url 'home' %}" class="button">Continue Shopping</a>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% load static %}
+{% load bootstrap4 %}
+<link rel="stylesheet" type="text/css" href="{% static 'momreg.css' %}">
+<title>Homemade Meals Sign Up</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body style="background-image: url('{% static '/img/background.jpg' %}'); background-size: cover;">
+  
+<div class="container">
+    <h2>Homemade Meals Sign Up</h2>
+    <form id="signupForm" method="post" action="{% url 'signup' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="full_name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone_number" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="dietaryRestrictions">Dietary Restrictions:</label>
+            <input type="text" id="dietaryRestrictions" name="dietary_restrictions">
+        </div>
+        <div class="form-group">
+            <label for="cuisinePreferences">Cuisine Preferences:</label>
+            <input type="text" id="cuisinePreferences" name="cuisine_preferences">
+        </div>
+        <div class="form-group">
+            <label for="allergies">Allergies:</label>
+            <input type="text" id="allergies" name="allergies">
+        </div>
+        <div class="form-group">
+            <label for="deliveryTime">Preferred Delivery Time:</label>
+            <input type="time" id="deliveryTime" name="preferred_delivery_time" required>
+        </div>
+        <div class="form-group">
+            <label for="deliveryFrequency">Delivery Frequency:</label>
+            <select id="deliveryFrequency" name="delivery_frequency" required>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="bi-weekly">Bi-weekly</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="peopleServed">Number of People to be Served:</label>
+            <input type="number" id="peopleServed" name="people_served" required>
+        </div>
+        <div class="form-group">
+            <label for="comments">Comments:</label>
+            <textarea id="comments" name="comments"></textarea>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    
+    <!-- Display submitted data -->
+    <div id="submittedData"></div>
+
+</div>
+
+<script>
+    document.getElementById("signupForm").addEventListener("submit", function(event){
+        event.preventDefault();
+        const formData = new FormData(this);
+        const formObject = {};
+        formData.forEach(function(value, key){
+            formObject[key] = value;
+        });
+
+        // Display submitted data
+        const submittedDataDiv = document.getElementById("submittedData");
+        submittedDataDiv.innerHTML = "<h3>Submitted Form Data</h3>";
+        const table = document.createElement('table');
+        for (const key in formObject) {
+            if (formObject.hasOwnProperty(key)) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td><strong>${key}</strong></td><td>${formObject[key]}</td>`;
+                table.appendChild(row);
+            }
+        }
+        
+    });
+
+
+   
+</script>
+</body>
+</html>

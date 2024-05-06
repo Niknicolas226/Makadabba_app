@@ -1,0 +1,568 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    {% load bootstrap4 %}
+    <link rel="stylesheet" type="text/css" href="{% static 'practice.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'button.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+   <style>
+       /* Add this CSS to your existing CSS file or style tag */
+       
+.toast {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+.toast-success {
+  background-color: #4CAF50;
+}
+
+.toast-error {
+  background-color: #f44336;
+}
+
+
+   </style>
+   
+    
+    <title>MA KA DABBA!!!</title>
+  </head>
+  <body>
+      <header>
+        <div class="container">
+          <nav class="nav_checkbox">
+              <div class="col-md-1">
+                  <!-- Your avatar goes here -->
+
+                 
+
+              </div>
+              <input type="checkbox" id="tab-nav" class="tab-nav">
+              <label for="tab-nav" class="label">
+                  <div class="burger"></div>
+                  <div class="burger"></div>
+                  <div class="burger"></div>
+              </label>
+              <ul class="content_nav">
+                {% if user.is_authenticated %}   <li><a href="userui">HOME</a></li> {% endif %}
+                  <li><a href="signup">SIGNUP</a></li>
+                  <li><a href="signin">LOGIN</a></li>
+                  <li><a href="menu">OUR MENU</a></li>
+                  
+              </ul>
+              <!-- Sign-out button -->
+              <!-- Sign-out button -->
+              <!-- Logout button -->
+              {% if user.is_authenticated %}
+                <div class="sign-out">
+                  <a href="{% url 'signout' %}" class="btn btn-outline-primary">Sign Out</a>
+                </div>
+             {% endif %}
+             
+             
+<!-- Show toast message when logged out -->
+{% if messages %}
+{% for message in messages %}
+    {% if message.tags == 'success' %}
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000" data-autohide="true">
+            <div class="toast-header">
+                <strong class="mr-auto">Success</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                {{ message }}
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+{% endif %}
+
+<div id="toast-container"></div>
+            
+          </nav>
+      </div>
+    </header>      
+         <div class="container-2">
+            <!--<img src="motog.jpg" alt="image"> -->
+           
+            
+  
+
+         </div>
+         
+         <div class="flex-container">
+          <div class="mySlides fade">
+              <div class="numbertext">1 / 3</div>
+              <img src="{% static '/img/momre.jpg' %}" class="card-img-top" alt="...">  
+              
+            </div>
+            
+            <div class="mySlides fade">
+              <div class="numbertext">2 / 3</div>
+              <img src="{% static '/img/cooking5.jpg' %}" class="card-img-top" alt="...">  
+              
+            </div>
+            
+            <div class="mySlides fade">
+              <div class="numbertext">3 / 3</div>
+              <img src="{% static '/img/logo.jpg' %}" class="card-img-top" alt="...">    <!--dabba6.jpg mom778.jpg mom4.jpg-->
+              
+            </div>
+            <br>
+  
+      </div>
+      
+      <div style="text-align:center">
+          <span class="dot"></span> 
+          <span class="dot"></span> 
+          <span class="dot"></span> 
+        </div>
+        <div class="container-1"></div>
+         <div class=" text-center col-md-3 col-lg-8">   
+          <p>
+           
+          </p>
+                                   <!--container 1 style sheet-->
+          
+        </div>
+      </div>
+      <div class="container-1">
+        <div class="container">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-10 offset-md-1 text-center">
+                <h1 class="display-4 mb-4">Welcome to MA KA DABBA!!!</h1>
+                <p class="lead">
+                  Deliciously Crafted Just for You
+                </p>
+                <p class="lead">
+                  At [Your Home Cook's Name], we're on a mission to transform your dining experience. Say goodbye to mundane meals and hello to a culinary adventure right at your doorstep!
+                </p>
+                <p class="lead">
+                  Picture this: a symphony of flavors, meticulously prepared by our talented home cooks, each dish bursting with the essence of homemade goodness. From the sizzle of the pan to the aroma that fills your kitchen, every moment is a celebration of taste and tradition.
+                </p>
+                <p class="lead">
+                  We understand the hustle and bustle of student life or bachelorhood. That's why we're here to simplify your life without compromising on quality. Whether you're buried under textbooks or buried in work, we've got your back with wholesome, nutritious meals that fuel your ambitions.
+                </p>
+                <p class="lead">
+                  So why settle for mediocrity when you can savor excellence? Join us in our quest to redefine home dining. Let your taste buds be your guide as you embark on a culinary journey like no other. Welcome to the [Your Home Cook's Name] family – where every meal is a masterpiece!
+                </p>
+              </div>
+            </div>
+          </div>
+          
+</div>
+
+      </div>
+      <div class="centered"> 
+          <h1>MA KA DABBA!!!</h1>
+          </div>
+          
+        <div class="centered">
+  
+          
+         <!--
+  
+            here the menu goes
+  
+         -->
+        
+  
+      <!-- here 
+      the menu ends
+  -->
+  
+
+  
+<section class="py-0">
+       
+    <div class="container-fluid">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4 col-lg-3" >
+            <div class="card card_red text-center">
+              <img src="{% static '/img/monthly.jpg' %}" class="card-img-top" alt="...">       
+                <div class="title">
+                <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                <h2>MONTHLY MEMBERSHIP</h2>
+              </div>
+              <div class="price">
+                <h4>JOIN MEMBERSHIP PLAN</h4>
+                
+              <a class="card-block stretched-link" href="menu" style="background-color: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none; font-size: 16px; transition: background-color 0.3s ease;">
+                Join Now
+              </a>
+              </div>
+              <a class="card-block stretched-link"  href="subscription"></a>
+            </div>
+          </div>
+          <div class="col-sm-4 col-lg-3">
+            <div class="card card_violet text-center">
+              <div style="display: flex; justify-content: center; align-items: center;">
+                <img src="{% static '/img/thali.png' %}" class="card-img-top" alt="..." style="width: 170px; height: auto;">
+            </div>         
+
+              <div class="title">
+                <i class="fa fa-plane" aria-hidden="true"></i>
+                <h2>ORDER-NOW</h2>
+              </div>
+              <div class="price">
+                <h4>TRY OUT YOUR FIRST MEAL!!!</h4>
+              </div>
+             
+              <a class="card-block stretched-link" href="menu" style="background-color: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none; font-size: 16px; transition: background-color 0.3s ease;">
+                Order Now
+              </a>
+              
+
+
+            </div>
+          </div>
+          <div class="col-sm-4 col-lg-3">
+            <div class="card card_three text-center">
+              <div style="display: flex; justify-content: center; align-items: center;">
+                <img src="{% static '/img/veg.png' %}" class="card-img-top" alt="..." style="width: 130px; height: auto;">
+            </div>
+            
+          
+              <div class="title">
+                <i class="fa fa-rocket" aria-hidden="true"></i>
+                <h2>ONLY-VEG</h2>
+              </div>
+             
+              <div class="price">
+                <h4>
+                  Delicious, wholesome vegetarian meals, cooked with care and delivered straight to your door for a comforting dining experience. </h4>
+                
+              </div>
+             
+              
+              <a class="card-block stretched-link" href="our-commitment" style="background-color: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none; font-size: 16px; transition: background-color 0.3s ease;">
+                KNOW MORE 
+              </a>
+            </div>
+          </div>
+          <div class="col-sm-4 col-lg-3">
+            <div class="card card_three text-center">
+              <img src="{% static '/img/123.jpg' %}" class="card-img-top" alt="...">                       
+
+              <div class="title">
+                <i class="fa fa-rocket" aria-hidden="true"></i>
+
+               <h2>Registration  MOM</h2>
+
+                
+              </div>
+              <div class="price">
+                <h4>join us as a mom </h4>
+              </div>
+              <div class="order">
+                <span style="background-color: #007bff; color: #fff; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none; font-size: 16px;">Register</span>
+            </div>
+            <a class="card-block stretched-link"  href="momreg"></a>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    
+  
+    
+  </section>
+  <!--this is how we work goes here-->
+  <section class="py-0 bg-primary-gradient">
+
+    <div class="container">
+      <div class="row justify-content-center g-0">
+        <div class="col-xl-9 ">
+          <div class="col-lg-6 text-center mx-auto mb-3 mb-md-5 mt-4">
+            <h5 class="fw-bold text-danger fs-3 fs-lg-5 lh-sm my-6">How does it work</h5>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 col-md-3 mb-6">
+              <div class="text-center"><img class="shadow-icon" src="{% static '/img/10.png' %}" height="112" alt="..." />
+                <h5 class="mt-4 fw-bold">We pick home made food</h5>
+                <p class="mb-md-0">Choose the location where your food will be delivered.</p>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3 mb-6">
+              <div class="text-center"><img class="shadow-icon" src="{% static '/img/7.png' %}" height="112" alt="..." />
+                <h5 class="mt-4 fw-bold">we deliver to you</h5>
+                <p class="mb-md-0">Check over hundreds of menus to pick your favorite food</p>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3 mb-6">
+              <div class="text-center"><img class="shadow-icon" src="{% static '/img/money.png' %}" height="112" alt="..." />
+                <h5 class="mt-4 fw-bold">Pay in cash or by online</h5>
+                <p class="mb-md-0">It's quick, safe, and simple. Select several methods of payment</p>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3 mb-6">
+              <div class="text-center"><img class="shadow-icon" src="{% static '/img/meal.png' %}" height="112" alt="..." />
+                <h5 class="mt-4 fw-bold">Enjoy meals</h5>
+                <p class="mb-md-0">Food is made and delivered directly to your home.</p>
+              </div>
+              
+              </div>
+            </div>
+              
+            </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- end of .container-->
+
+    <!-- Here goes how Registration of mom -->
+    <section class="py-0 bg-primary-gradient">
+
+      <div class="container">
+        <div class="row justify-content-center g-0">
+          <div class="col-xl-9 ">
+            <div class="col-lg-6 text-center mx-auto mb-3 mb-md-5 mt-4">
+              <h5 class="fw-bold text-danger fs-3 fs-lg-5 lh-sm my-6">Registration For Partner </h5>
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-md-3 mb-6">
+                <div class="text-center"><img class="shadow-icon" src="{% static '/img/register.png' %}" height="112" alt="..." />
+                  <h5 class="mt-4 fw-bold">Registration For Partner</h5>
+                  <p class="mb-md-0">Registration For Partner under Registraion.</p>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3 mb-6">
+                <div class="text-center"><img class="shadow-icon" src="{% static '/img/check.png' %}" height="112" alt="..." />
+                  <h5 class="mt-4 fw-bold">We Will Check your details</h5>
+                  <p class="mb-md-0"> After Verification We Will sent you Login Username and Password </p>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3 mb-6">
+                <div class="text-center"><img class="shadow-icon" src="{% static '/img/menu.png' %}" height="112" alt="..." />
+                  <h5 class="mt-4 fw-bold">Meal Will Made </h5>
+                  <p class="mb-md-0">According To the weekly Time-table</p>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3 mb-6">
+                <div class="text-center"><img class="shadow-icon" src="{% static '/img/lunchbox.png' %}" height="112" alt="..." />
+                  <h5 class="mt-4 fw-bold">We Will Pickup-Deliver</h5>
+                  <p class="mb-md-0">Food is made and delivered directly to your home.</p>
+                </div>
+                
+                </div>
+              </div>
+                
+              </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- end of .container-->
+  
+   
+
+
+ 
+  <section class="content_section">
+      
+
+  </section>
+       <!-- Footer -->
+<footer class="text-center text-lg-start bg-light text-muted">
+  <!-- Section: Social media -->
+  <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+    <!-- Left -->
+    <div class="me-5 d-none d-lg-block">
+      <span>Get connected with us on social networks:</span>
+    </div>
+    <!-- Left -->
+
+    <!-- Right -->
+    <div>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-google"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="" class="me-4 text-reset">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <!-- Right -->
+  </section>
+  <!-- Section: Social media -->
+
+  <!-- Section: Links  -->
+  <section class="">
+    <div class="container text-center text-md-start mt-5">
+      <!-- Grid row -->
+      <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <!-- Content -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            <i class="fas fa-gem me-3"></i>MA KA DABBA!!!
+          </h6>
+          <p>
+            Experience the authentic taste of homemade vegetarian meals, lovingly prepared by mothers from various households. Each dish carries a unique touch, reflecting the rich culinary heritage of different cultures. From savory curries to wholesome soups and aromatic rice dishes, every bite is infused with the warmth and care that only a mother's cooking can provide. Delivered fresh to your door, these meals not only nourish the body but also feed the soul, creating a connection to a community of passionate home cooks who share their culinary traditions with love and pride.
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        
+          <!-- Links -->
+         
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">
+            Useful links
+          </h6>
+          <p>
+            <a href="pricing" class="text-reset">Pricing</a>
+          </p>
+          <p>
+            <a href="how-we-deliver" class="text-reset">Settings</a>
+          </p>
+          <p>
+            <a href="customer-care" class="text-reset">Customer Care</a>
+          </p>
+          <p>
+            <a href="how-we-deliver" class="text-reset">How we deliver</a>
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <!-- Links -->
+          <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+          <p><i class="fas fa-home me-3"></i> OFFICE NUMBER 8755010346</p>
+          <p>
+            <i class="fas fa-envelope me-3"></i>
+            makadabba@gmail.com
+          </p>
+          <p>
+            <a href="submit" class="text-reset">SUBMIT YOUR QUERIES.</a>
+          </p>
+          <p><i class="fas fa-phone me-3"></i> 8755010346</p>
+          <p><i class="fas fa-print me-3"></i> 4561234586</p>
+        </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
+    </div>
+  </section>
+  <!-- Section: Links  -->
+
+  <!-- Copyright -->
+  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+    
+    <a class="text-reset fw-bold" href=" " >MA KA DABBA!!!</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+  <script>
+      burger = document.querySelector(".burger")
+      burger.onclick = function() {
+          navbar = document.querySelector(".nav_checkbox")
+          navbar.classlist.toggle("active"); 
+      }
+      let slideIndex = 0;
+      showSlides();
+
+      function showSlides() {
+      let i;
+      let slides = document.getElementsByClassName("mySlides");
+      let dots = document.getElementsByClassName("dot");
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+         }
+       slideIndex++;
+          if (slideIndex > slides.length) {slideIndex = 1}    
+      for (i = 0; i < dots.length; i++) {
+       dots[i].className = dots[i].className.replace(" active", "");
+       }
+     slides[slideIndex-1].style.display = "block";  
+     dots[slideIndex-1].className += " active";
+     setTimeout(showSlides, 2000); // Change image every 2 seconds
+
+     }
+     Splitting();
+     ScrollOut({
+       targets: '[data-splitting]'
+      });
+      
+
+
+      /*signout */
+     
+      
+
+     
+     
+     
+
+      
+  </script>
+
+  <script>
+
+    {% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <script>
+                var toastContainer = document.getElementById('toast-container');
+
+                function showToast(type, message) {
+                    var toast = document.createElement('div');
+                    toast.className = 'toast';
+                    if (type === 'success') {
+                        toast.className += ' toast-success';
+                    } else if (type === 'error') {
+                        toast.className += ' toast-error';
+                    }
+                    toast.innerHTML = message;
+                    toastContainer.appendChild(toast);
+
+                    setTimeout(function() {
+                        toastContainer.removeChild(toast);
+                    }, 3000); // Remove toast after 3 seconds
+                }
+
+                showToast('success', '{{ message }}');
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+
+
+
+  </script>
+
+</body>
+</html>

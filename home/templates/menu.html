@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'meu.css' %}"> 
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <style>
+    /* Add a colorful background gradient to the body */
+    body {
+      background: linear-gradient(to right, #FFB300, #FFDD00);
+      align-items: center;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+    
+    /* Style for menu buttons */
+    .menu-btns {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    
+    .menu-btn {
+      margin: 0 10px;
+      padding: 15px 30px;
+      font-size: 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .menu-btn:hover {
+      background-color: rgba(0, 0, 0, 0.9);
+    }
+    
+    .active-btn {
+      background-color: #333;
+    }
+    
+    /* Style for menu sections */
+    #menu {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .hide-menu {
+      display: none !important;
+    }
+    
+    /* Style for menu items */
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 30px;
+    }
+    
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    li {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    img {
+      width: 120px;
+      margin-right: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .item-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    .item-name {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    
+    .item-description {
+      font-size: 16px;
+      color: #666;
+    }
+    
+    .item-price {
+      font-size: 18px;
+      font-weight: bold;
+      color: #FFB300;
+    }
+    
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #333;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    button:hover {
+      background-color: #555;
+    }
+  </style>
+  <title>Menu</title>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+    <div class="container">
+      <a class="navbar-brand" href="#">MA ka dabba!!!</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link cart-icon" href="{% url 'view_cart' %}"><i class="fas fa-shopping-cart"></i> Cart <span id="cart-badge" class="badge badge-light">{{ cart_items_count }}</span></a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <span class="nav-link" onclick="redirectToSignUp()">Sign Up First</span>
+            </li>
+          {% endif %}
+        </ul>
+        
+      </div>
+    </div>
+  </nav>
+
+<section class="menu">
+  <div class="menu-container">
+    <div class="menu-head">
+      <h2>Choose from the menu! Today's specials</h2>
+    </div>
+    <div class="menu-btns">
+      <button type="button" class="menu-btn active-btn" id="breakfastBtn">BREAKFAST</button>
+      <button type="button" class="menu-btn" id="lunchBtn">LUNCH</button>
+      <button type="button" class="menu-btn" id="dinnerBtn">DINNER</button>
+    </div>
+    
+    <div id="menu">
+      <div class="Breakfast active-menu" id="breakfastMenu">
+        <h2>Breakfast <span class="category-icon">🌞</span></h2>
+        <ul>
+          {% for item in breakfast_items %}
+          <li>
+            <img src="{{ item.image.url }}" alt="{{ item.name }}">
+            <div class="item-info">
+              <div>
+                <a href="{{ item.url }}"><h3 class="item-name">{{ item.name }}</h3></a>
+                <p class="item-description">{{ item.description }}</p>
+              </div>
+              <div>
+                <h4 class="item-price">Rs.{{ item.price }}</h4>
+                {% if user.is_authenticated %}
+                  <button class="add-to-cart" data-item-id="{{ item.id }}">Add to Cart</button>
+                {% else %}
+                  <span class="btn btn-primary" onclick="redirectToSignUp()">Sign Up First</span>
+                {% endif %}
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      
+      <div class="lunch hide-menu" id="lunchMenu">
+        <h2>Lunch <span class="category-icon">🍔</span></h2>
+        <ul>
+          {% for item in lunch_items %}
+          <li>
+            <img src="{{ item.image.url }}" alt="{{ item.name }}">
+            <div class="item-info">
+              <div>
+                <a href="{{ item.url }}"><h3 class="item-name">{{ item.name }}</h3></a>
+                <p class="item-description">{{ item.description }}</p>
+              </div>
+              <div>
+                <h4 class="item-price">Rs.{{ item.price }}</h4>
+                {% if user.is_authenticated %}
+                  <button class="add-to-cart" data-item-id="{{ item.id }}">Add to Cart</button>
+                {% else %}
+                  <span class="btn btn-primary" onclick="redirectToSignUp()">Sign Up</span>
+                {% endif %}
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      
+      <div class="dinner hide-menu" id="dinnerMenu">
+        <h2>Dinner <span class="category-icon">🍝</span></h2>
+        <ul>
+          {% for item in dinner_items %}
+          <li>
+            <img src="{{ item.image.url }}" alt="{{ item.name }}">
+            <div class="item-info">
+              <div>
+                <a href="{{ item.url }}"><h3 class="item-name">{{ item.name }}</h3></a>
+                <p class="item-description">{{ item.description }}</p>
+              </div>
+              <div>
+                <h4 class="item-price">Rs.{{ item.price }}</h4>
+                {% if user.is_authenticated %}
+                  <button class="add-to-cart" data-item-id="{{ item.id }}">Add to Cart</button>
+                {% else %}
+                  <span class="btn btn-primary" onclick="redirectToSignUp()">Sign Up</span>
+                {% endif %}
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="{% static 'script.js' %}"></script>
+<script>
+  const breakfastBtn = document.getElementById('breakfastBtn');
+  const lunchBtn = document.getElementById('lunchBtn');
+  const dinnerBtn = document.getElementById('dinnerBtn');
+  const breakfastMenu = document.getElementById('breakfastMenu');
+  const lunchMenu = document.getElementById('lunchMenu');
+  const dinnerMenu = document.getElementById('dinnerMenu');
+
+  breakfastBtn.addEventListener('click', function() {
+    breakfastMenu.classList.remove('hide-menu');
+    lunchMenu.classList.add('hide-menu');
+    dinnerMenu.classList.add('hide-menu');
+    breakfastBtn.classList.add('active-btn');
+    lunchBtn.classList.remove('active-btn');
+    dinnerBtn.classList.remove('active-btn');
+  });
+
+  lunchBtn.addEventListener('click', function() {
+    breakfastMenu.classList.add('hide-menu');
+    lunchMenu.classList.remove('hide-menu');
+    dinnerMenu.classList.add('hide-menu');
+    breakfastBtn.classList.remove('active-btn');
+    lunchBtn.classList.add('active-btn');
+    dinnerBtn.classList.remove('active-btn');
+  });
+
+  dinnerBtn.addEventListener('click', function() {
+    breakfastMenu.classList.add('hide-menu');
+    lunchMenu.classList.add('hide-menu');
+    dinnerMenu.classList.remove('hide-menu');
+    breakfastBtn.classList.remove('active-btn');
+    lunchBtn.classList.remove('active-btn');
+    dinnerBtn.classList.add('active-btn');
+  });
+
+  const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+  addToCartButtons.forEach(button => {
+    button.addEventListener('click', addToCart);
+  });
+
+  function addToCart(event) {
+    const itemId = event.target.dataset.itemId;
+    fetch(`/add_to_cart/${itemId}/`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to add item to cart');
+        }
+        return response.json();
+      })
+      .then(data => {
+        alert(`${data.message}`);
+        updateCartBadge(data.cart_items_count);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to add item to cart');
+      });
+  }
+
+  function updateCartBadge(count) {
+    const cartBadge = document.getElementById('cart-badge');
+    cartBadge.innerText = count;
+  }
+
+  // Hide lunch and dinner menus by default
+  lunchMenu.classList.add('hide-menu');
+  dinnerMenu.classList.add('hide-menu');
+
+  function redirectToSignUp() {
+    // Redirect to the signup page
+    window.location.href = "{% url 'signup' %}";
+  }
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

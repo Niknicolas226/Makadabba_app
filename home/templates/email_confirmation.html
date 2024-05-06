@@ -1,0 +1,66 @@
+{% autoescape off %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Ma Ka Dabba!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #007bff;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+        }
+        a {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px auto;
+            max-width: 200px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <h1>Welcome to Ma Ka Dabba!</h1>
+        <h2>Hello {{ name }}!!</h2>
+        <p>Thank you for visiting our website. We're thrilled to have you join our community of food enthusiasts who appreciate home-cooked goodness delivered straight to their doorstep.</p>
+        <p>To complete your registration, please confirm your email by clicking on the following link:</p>
+        <p><a class="button" href="http://{{ domain }}{% url 'activate' uidb64=uid token=token %}">Confirmation Link</a></p>
+        <p>If the button above doesn't work, copy and paste the following link into your browser:</p>
+        <p>http://{{ domain }}{% url 'activate' uidb64=uid token=token %}</p>
+        <p>If you don't see the email in your inbox, please check your spam or junk folder just in case it got misplaced.</p>
+        <p>We're excited to have you as part of the Ma Ka Dabba family! If you have any questions or need further assistance, feel free to reach out to us.</p>
+        <p>Thanking You,</p>
+        <p>Aditya Tamta</p>
+        <p>Ma Ka Dabba Restaurant</p>
+    </div>
+</body>
+</html>
+
+{% endautoescape %}

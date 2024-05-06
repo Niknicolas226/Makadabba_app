@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% load bootstrap4 %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Gateway</title>
+    <!-- Link to an external CSS file -->
+    <style>
+
+
+        /* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgba(255, 179, 0, 0.789);
+}
+
+/* Container styles */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+h1, h2 {
+    font-weight: normal;
+}
+
+/* Cart section styles */
+.cart-section ul {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.cart-section li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Payment section styles */
+.payment-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
+}
+
+.payment-methods {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.payment-method {
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.payment-method.active {
+    border-color: #007bff;
+}
+
+.payment-method img {
+    width: 100px;
+    height: auto;
+}
+
+.payment-details {
+    display: none;
+}
+
+/* Form styles */
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="month"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Empty cart styles */
+.empty-cart {
+    text-align: center;
+    padding: 20px;
+    border: 1px dashed #ccc;
+    border-radius: 5px;
+}
+
+.payment-method:hover {
+    background-color: #f0f0f0; /* Change background color on hover */
+}
+
+.payment-method img {
+    width: 100px;
+    height: auto;
+    transition: transform 0.3s ease; /* Add transition for smooth scaling */
+}
+
+.payment-method:hover img {
+    transform: scale(1.1); /* Scale up the image on hover */
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Payment Gateway</h1>
+        </header>
+        
+        {% if cart_items %}
+            <section class="cart-section">
+                <h2>Your Cart Items</h2>
+                <ul>
+                    {% for item in cart_items %}
+                        <li>{{ item.quantity }} x {{ item.menu_item.name }} - ₹{{ item.menu_item.price }} x {{ item.quantity }}</li>
+                    {% endfor %}
+                </ul>
+                <h2>Total Amount: ₹{{ total_amount }}</h2>
+            </section>
+            
+            <section class="payment-section">
+                <h2>Choose your payment method</h2>
+                <div class="payment-methods">
+                    <div class="payment-method active" data-method="cash">
+                        <img src="{% static '/img/delivery.png' %}" alt="...">  
+                        <p>Cash on Delivery</p>
+                    </div>
+                    <div class="payment-method" data-method="online">
+                        <img src="{% static '/img/debitcard.png' %}" alt="Online Payment"> 
+                        <p>Online Payment</p>
+                    </div>
+                </div>
+                
+                <div id="payment-details" class="payment-details">
+                    <h2>Payment Details</h2>
+                    <form id="payment-form" method="post" action="{% url 'process_payment' %}">
+                        {% csrf_token %}
+                        
+                        <!-- Hidden field to store the selected payment method -->
+                        <input type="hidden" id="payment-method" name="payment_method" value="cash">
+                        
+                        <!-- Other payment details fields here -->
+                        <div class="form-group">
+                            <label for="name">Name on Card</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="card-number">Card Number</label>
+                            <input type="text" id="card-number" name="card_number" pattern="[0-9]{16}" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="expiry-date">Expiry Date</label>
+                            <input type="month" id="expiry-date" name="expiry_date" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" name="cvv" pattern="[0-9]{3,4}" required>
+                        </div>
+                        
+                        <a href="{% url 'process_payment' %}"><button type="submit">Make Payment</button></a>
+                    </form>
+                </div>
+            </section>
+        {% else %}
+            <!-- Cart is empty -->
+            <section class="empty-cart">
+                <p>Your cart is empty. Please add items to your cart before proceeding to payment.</p>
+            </section>
+        {% endif %}
+    </div>
+    
+    <script>
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        const paymentDetails = document.getElementById('payment-details');
+        const paymentForm = document.getElementById('payment-form');
+        const paymentMethodInput = document.getElementById('payment-method');
+        
+        paymentMethods.forEach(method => {
+            method.addEventListener('click', () => {
+                paymentMethods.forEach(m => m.classList.remove('active'));
+                method.classList.add('active');
+                
+                if (method.dataset.method === 'online') {
+                    paymentDetails.style.display = 'block';
+                    paymentForm.style.display = 'block';
+                    paymentMethodInput.value = 'online';
+                } else {
+                    paymentDetails.style.display = 'none';
+                    paymentForm.style.display = 'none';
+                    paymentMethodInput.value = 'cash';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

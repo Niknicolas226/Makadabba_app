@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'menu.css' %}"> 
+  <title>Menu</title>
+</head>
+<body>
+
+  <section class="menu">
+    <div class="menu-container">
+      <div class="menu-head">
+        <h2>Choose from the menu! Today's menu</h2>
+      </div>
+      <div class="menu-btns">
+        <button type="button" class="menu-btn active-btn" id="breakfastBtn">BREAKFAST</button>
+        <button type="button" class="menu-btn" id="lunchBtn">LUNCH</button>
+        <button type="button" class="menu-btn" id="dinnerBtn">DINNER</button>
+      </div>
+      
+      <div id="menu">
+        <div class="Breakfast" id="breakfastMenu">
+          <h2>Breakfast</h2>
+          <ul>
+            {% for item in breakfast_items %}
+            <li>
+              <img src="{{ item.image.url }}" alt="{{ item.name }}">
+              <a href="{{ item.url }}">{{ item.name }}</a>
+              <button class="add-to-cart" data-item-id="{{ item.id }}">Add to cart</button>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        
+        <div class="lunch" id="lunchMenu">
+          <h2>Lunch</h2>
+          <ul>
+            {% for item in lunch_items %}
+            <li>
+              <img src="{{ item.image.url }}" alt="{{ item.name }}">
+              <a href="{{ item.url }}">{{ item.name }}</a>
+              <button class="add-to-cart" data-item-id="{{ item.id }}">Add to cart</button>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        
+        <div class="dinner" id="dinnerMenu">
+          <h2>Dinner</h2>
+          <ul>
+            {% for item in dinner_items %}
+            <li>
+              <img src="{{ item.image.url }}" alt="{{ item.name }}">
+              <a href="{{ item.url }}">{{ item.name }}</a>
+              <button class="add-to-cart" data-item-id="{{ item.id }}">Add to cart</button>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<script src="{% static 'script.js' %}"></script>
+<script>
+  const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+  addToCartButtons.forEach(button => {
+    button.addEventListener('click', addToCart);
+  });
+
+  function addToCart(event) {
+    const itemId = event.target.dataset.itemId;
+    fetch(`/add_to_cart/${itemId}/`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to add item to cart');
+        }
+        return response.json();
+      })
+      .then(data => {
+        alert(`${data.name} added to cart`);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
+</script>
+
+</body>
+</html>

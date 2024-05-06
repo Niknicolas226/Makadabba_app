@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    {% load bootstrap4 %}
+    <link rel="stylesheet" type="text/css" href="{% static 'practice.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'button.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <title>{% block title %}Default Title{% endblock %}</title>
+    <style>
+        body {
+            position: relative;
+            min-height: 100vh;
+            background-color: #2a9d8f;
+        }
+        .progress {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%; /* Adjust as needed */
+            height: 10px;
+            border: 2px solid #f4a261;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .progress .color {
+            position: absolute;
+            background-color: #ffffff;
+            height: 100%;
+            border-radius: 15px;
+            animation: progressAnimation 4s infinite linear;
+        }
+        @keyframes progressAnimation {
+            0% {
+                width: 0%;
+            }
+            25% {
+                width: 50%;
+            }
+            50% {
+                width: 75%;
+            }
+            75% {
+                width: 85%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        {% block header %}
+        <header>
+            <div class="container">
+                <nav class="nav_checkbox">
+                    <div class="col-md-1">
+                        <!-- Add content here if needed -->
+                    </div>
+                   <!---<a href="#" class="logo"><marquee width="100%" direction="right" height="100px">
+                        <h1>MA KA DABBA!!!</h1>
+                        </marquee></a> -->
+                        
+                    <input type="checkbox" id="tab-nav" class="tab-nav">
+                    <label for="tab-nav" class="label">
+                        <div class="burger"></div>
+                        <div class="burger"></div>
+                        <div class="burger"></div>
+                    </label>
+                    <ul class="content_nav">
+                        <li><a href="#">HOME</a></li>
+                        <li><a href="signup">SIGNUP</a></li>
+                        <li><a href="signin">LOGIN</a></li>
+                        <li><a href="menu">OUR MENU</a></li>
+                        <!-- Add other menu items here -->
+                    </ul>
+                </nav>
+            </div>
+           </header>{% endblock %}
+    </header>
+
+    <nav>
+        <!-- Navigation menu goes here if needed -->
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>{% block footer %}Default Footer{% endblock %}</p>
+    </footer>
+
+
+    <div class="progress">
+        <div class="color"></div>
+    </div>
+    <div id="content" style="display:none;">
+        
+    </div>
+    <script>
+        // Show content when loaded
+        window.onload = function() {
+            document.getElementById('content').style.display = 'block';
+        };
+    </script>
+</body>
+</html>
+
